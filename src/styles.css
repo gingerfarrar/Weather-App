@@ -1,0 +1,21 @@
+img {
+  display: block;
+  float: right;
+  margin: 10px;
+  width: 120px;
+}
+#today-temp {
+  font-size: 64px;
+  font-weight: 400;
+}
+.units {
+  position: relative;
+  top: -34px;
+}
+.btn-group {
+  margin: 10px;
+}
+.wind {
+  list-style: none;
+  float: right;
+}
