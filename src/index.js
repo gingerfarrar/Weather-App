@@ -24,31 +24,12 @@ let day = days[now.getDay()];
 
 p1.innerHTML = `${day}, ${hours}:${minutes}`;
 
-function fahrenheit(event) {
-  event.preventDefault();
-  let temp = document.querySelector("#today-temp");
-
-  temp.innerHTML = "80°f";
-}
-
-function celcius(event) {
-  event.preventDefault();
-  let temp = document.querySelector("#today-temp");
-
-  temp.innerHTML = "27°c";
-}
-
-let fBtn = document.querySelector("#f-btn");
-fBtn.addEventListener("click", fahrenheit);
-let cBtn = document.querySelector("#c-btn");
-cBtn.addEventListener("click", celcius);
+let celciusTemp = null;
 
 function displayWeather(response) {
+  celciusTemp = Math.round(response.data.main.temp);
   document.querySelector("#city").innerHTML = response.data.name;
-  document.querySelector("#today-temp").innerHTML = Math.round(
-    response.data.main.temp
-  );
-
+  document.querySelector("#today-temp").innerHTML = celciusTemp;
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
@@ -91,5 +72,27 @@ function currentPos(event) {
 }
 let currentbtn = document.querySelector("#current-btn");
 currentbtn.addEventListener("click", currentPos);
+
+function fahrenheit(event) {
+  event.preventDefault();
+  let temp = document.querySelector("#today-temp");
+  let temperature = (celciusTemp * 9) / 5 + 32;
+  temp.innerHTML = Math.round(temperature);
+  let units = document.querySelector(".units");
+  units.innerHTML = "°F";
+}
+
+function celcius(event) {
+  event.preventDefault();
+  let temp = document.querySelector("#today-temp");
+  temp.innerHTML = celciusTemp;
+  let units = document.querySelector(".units");
+  units.innerHTML = "°C";
+}
+
+let fBtn = document.querySelector("#f-btn");
+fBtn.addEventListener("click", fahrenheit);
+let cBtn = document.querySelector("#c-btn");
+cBtn.addEventListener("click", celcius);
 
 search("Seattle");

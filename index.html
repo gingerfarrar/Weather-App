@@ -36,8 +36,6 @@
           </button>
         </form>
 
-        <img id="icon" src="images/sun.png" alt="sun icon" />
-
         <div class="btn-group btn-group-sm" role="group">
           <button type="button" class="btn btn-outline-primary" id="f-btn">
             fahrenheit
@@ -46,19 +44,27 @@
             celsius
           </button>
         </div>
-        <h1 id="city"></h1>
-        <p id="date"></p>
-        <span id="today-temp"> </span>
-        <span class="units">°C</span>
-
-        <ul class="wind">
-          <li>Humidity: <span id="humidity"></span>%</li>
-          <li>Wind: <span id="wind"></span> km/h</li>
-        </ul>
-        <p>
-          <span id="description">sunny </span> <br />
-          80°/65°
-        </p>
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <h1 id="city"></h1>
+              <p id="date"></p>
+              <span id="today-temp"> </span>
+              <span class="units">°C</span>
+              <p id="high-low">
+                <span id="description">sunny </span> <br />
+                80°/65°
+              </p>
+            </div>
+            <div class="col-4">
+              <img id="icon" src="images/sun.png" alt="sun icon" />
+              <ul class="wind">
+                <li>Humidity: <span id="humidity"></span>%</li>
+                <li>Wind: <span id="wind"></span> km/h</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
         <hr />
         <div class="container">
