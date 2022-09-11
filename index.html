@@ -52,16 +52,15 @@
               <span id="today-temp"> </span>
               <span class="units">°C</span>
               <p id="high-low">
-                 <span class="current-max"> 80</span>°
-              /
-              <span class="current-min"> 65</span>°
+                <span class="current-max" id="current-max"> 80</span>° /
+                <span class="current-min" id="current-min"> 65</span>°
               </p>
             </div>
             <div class="col-4">
               <img id="icon" src="images/sun.png" alt="sun icon" />
               <ul class="wind">
                 <li>
-                   <span id="description">sunny </span>
+                  <span id="description">sunny </span>
                 </li>
                 <li>Humidity: <span id="humidity"></span>%</li>
                 <li>Wind: <span id="wind"></span> km/h</li>
@@ -71,22 +70,7 @@
         </div>
 
         <hr />
-        <div class="container">
-          <div class="row">
-            <div class="col">
-              <strong class="forcast-date"> Monday </strong>
-              <br />              
-                <img
-                  src="http://openweathermap.org/img/wn/03d@2x.png"
-                  alt=""
-                  width="50"
-                /> </br>            
-              <span class="forcast-max"> 80</span>°
-              /
-              <span class="forcast-min"> 65</span>°
-            </div>
-          </div>
-        </div>
+        <div class="weather-forecast" id="forecast"></div>
       </div>
     </div>
     <div class="github">

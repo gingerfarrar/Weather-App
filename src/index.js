@@ -25,6 +25,33 @@ let day = days[now.getDay()];
 p1.innerHTML = `${day}, ${hours}:${minutes}`;
 
 let celciusTemp = null;
+let maxCelciusTemp = null;
+let minCelciusTemp = null;
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row"> `;
+  let days = ["Sun", "Mon", "Tues"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` <div class="col">
+              <strong class="forcast-date"> ${day} </strong>
+              <br />              
+                <img
+                  src="http://openweathermap.org/img/wn/03d@2x.png"
+                  alt=""
+                  width="50"
+                /> </br>            
+              <span class="forcast-max"> 80</span>°
+              /
+              <span class="forcast-min"> 65</span>°
+          </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 
 function displayWeather(response) {
   celciusTemp = Math.round(response.data.main.temp);
@@ -45,6 +72,11 @@ function displayWeather(response) {
   document
     .querySelector("#icon")
     .setAttribute("alt", response.data.weather[0].description);
+  maxCelciusTemp = Math.round(response.data.main.temp_max);
+  minCelciusTemp = Math.round(response.data.main.temp_min);
+  document.querySelector("#current-max").innerHTML = maxCelciusTemp;
+  document.querySelector("#current-min").innerHTML = minCelciusTemp;
+  document.querySelector(".units").innerHTML = "°C";
 }
 
 function search(city) {
@@ -80,6 +112,12 @@ function fahrenheit(event) {
   temp.innerHTML = Math.round(temperature);
   let units = document.querySelector(".units");
   units.innerHTML = "°F";
+  let maxTemp = document.querySelector("#current-max");
+  let maxTemperature = (maxCelciusTemp * 9) / 5 + 32;
+  maxTemp.innerHTML = Math.round(maxTemperature);
+  let minTemp = document.querySelector("#current-min");
+  let minTemperature = (minCelciusTemp * 9) / 5 + 32;
+  minTemp.innerHTML = Math.round(minTemperature);
 }
 
 function celcius(event) {
@@ -88,6 +126,10 @@ function celcius(event) {
   temp.innerHTML = celciusTemp;
   let units = document.querySelector(".units");
   units.innerHTML = "°C";
+  let maxTemp = document.querySelector("#current-max");
+  maxTemp.innerHTML = maxCelciusTemp;
+  let minTemp = document.querySelector("#current-min");
+  minTemp.innerHTML = minCelciusTemp;
 }
 
 let fBtn = document.querySelector("#f-btn");
@@ -96,3 +138,4 @@ let cBtn = document.querySelector("#c-btn");
 cBtn.addEventListener("click", celcius);
 
 search("Seattle");
+displayForecast();
