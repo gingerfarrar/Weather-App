@@ -7,8 +7,7 @@
   border: 1px solid #dadde1;
   border-radius: 5px;
 }
-img {
-  margin: 10px;
+.icon {
   width: 120px;
 }
 #city {
@@ -32,13 +31,22 @@ img {
 #current-btn {
   margin-left: 10px;
 }
+.current-min {
+  opacity: 0.5;
+}
 #high-low {
   margin-top: 10px;
   margin-bottom: 0;
 }
+#description {
+  opacity: 0.5;
+}
 .wind {
   list-style: none;
   margin-bottom: 0;
+}
+.forcast-min {
+  opacity: 0.5;
 }
 .github {
   text-align: center;

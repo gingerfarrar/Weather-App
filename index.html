@@ -52,13 +52,17 @@
               <span id="today-temp"> </span>
               <span class="units">°C</span>
               <p id="high-low">
-                <span id="description">sunny </span> <br />
-                80°/65°
+                 <span class="current-max"> 80</span>°
+              /
+              <span class="current-min"> 65</span>°
               </p>
             </div>
             <div class="col-4">
               <img id="icon" src="images/sun.png" alt="sun icon" />
               <ul class="wind">
+                <li>
+                   <span id="description">sunny </span>
+                </li>
                 <li>Humidity: <span id="humidity"></span>%</li>
                 <li>Wind: <span id="wind"></span> km/h</li>
               </ul>
@@ -70,45 +74,16 @@
         <div class="container">
           <div class="row">
             <div class="col">
-              <strong>
-                Monday <br />
-                80°
-              </strong>
-              <br />
-              <small> 80°/65°</small>
-            </div>
-
-            <div class="col">
-              <strong>
-                Tuesday <br />
-                80°
-              </strong>
-              <br />
-              <small> 80°/65°</small>
-            </div>
-            <div class="col">
-              <strong>
-                Wednesday <br />
-                80°
-              </strong>
-              <br />
-              <small> 80°/65°</small>
-            </div>
-            <div class="col">
-              <strong>
-                Thursday <br />
-                80°
-              </strong>
-              <br />
-              <small> 80°/65°</small>
-            </div>
-            <div class="col">
-              <strong>
-                Friday <br />
-                80°
-              </strong>
-              <br />
-              <small> 80°/65°</small>
+              <strong class="forcast-date"> Monday </strong>
+              <br />              
+                <img
+                  src="http://openweathermap.org/img/wn/03d@2x.png"
+                  alt=""
+                  width="50"
+                /> </br>            
+              <span class="forcast-max"> 80</span>°
+              /
+              <span class="forcast-min"> 65</span>°
             </div>
           </div>
         </div>
