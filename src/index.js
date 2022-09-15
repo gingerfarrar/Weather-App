@@ -24,29 +24,55 @@ let day = days[now.getDay()];
 
 p1.innerHTML = `${day}, ${hours}:${minutes}`;
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[day];
+}
+
 let celciusTemp = null;
 let maxCelciusTemp = null;
 let minCelciusTemp = null;
 
-function displayForecast() {
+function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row"> `;
-  let days = ["Sun", "Mon", "Tues"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      ` <div class="col">
-              <strong class="forcast-date"> ${day} </strong>
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        ` <div class="col">
+              <strong class="forcast-date"> ${formatDay(
+                forecastDay.dt
+              )} </strong>
               <br />              
                 <img
-                  src="http://openweathermap.org/img/wn/03d@2x.png"
+                  src="http://openweathermap.org/img/wn/${
+                    forecastDay.weather[0].icon
+                  }@2x.png"
                   alt=""
                   width="50"
                 /> </br>            
-              <span class="forcast-max"> 80</span>°
+              <span class="forcast-max"> ${Math.round(
+                forecastDay.temp.max
+              )}</span>°
               /
-              <span class="forcast-min"> 65</span>°
+              <span class="forcast-min"> ${Math.round(
+                forecastDay.temp.min
+              )}</span>°
           </div>`;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
@@ -77,6 +103,7 @@ function displayWeather(response) {
   document.querySelector("#current-max").innerHTML = maxCelciusTemp;
   document.querySelector("#current-min").innerHTML = minCelciusTemp;
   document.querySelector(".units").innerHTML = "°C";
+  getForecast(response.data.coord);
 }
 
 function search(city) {
@@ -137,5 +164,11 @@ fBtn.addEventListener("click", fahrenheit);
 let cBtn = document.querySelector("#c-btn");
 cBtn.addEventListener("click", celcius);
 
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "fda3688b1db05987dd5d07c237aecfba";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
 search("Seattle");
-displayForecast();
