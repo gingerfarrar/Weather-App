@@ -42,11 +42,16 @@ function formatDay(timestamp) {
 let celciusTemp = null;
 let maxCelciusTemp = null;
 let minCelciusTemp = null;
+let units = "metric";
+let coords = null;
 
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row"> `;
+
+  let forecastMax = Math.round(response.data.daily[0].temp.max);
+  let forecastMin = Math.round(response.data.daily[0].temp.min);
 
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
@@ -64,13 +69,9 @@ function displayForecast(response) {
                   alt=""
                   width="50"
                 /> </br>            
-              <span class="forcast-max"> ${Math.round(
-                forecastDay.temp.max
-              )}</span>°
+              <span class="forcast-max"> ${forecastMax}</span>°
               /
-              <span class="forcast-min"> ${Math.round(
-                forecastDay.temp.min
-              )}</span>°
+              <span class="forcast-min"> ${forecastMin}</span>°
           </div>`;
     }
   });
@@ -103,7 +104,8 @@ function displayWeather(response) {
   document.querySelector("#current-max").innerHTML = maxCelciusTemp;
   document.querySelector("#current-min").innerHTML = minCelciusTemp;
   document.querySelector(".units").innerHTML = "°C";
-  getForecast(response.data.coord);
+  coords = response.data.coord;
+  getForecast(coords, "metric");
 }
 
 function search(city) {
@@ -145,6 +147,7 @@ function fahrenheit(event) {
   let minTemp = document.querySelector("#current-min");
   let minTemperature = (minCelciusTemp * 9) / 5 + 32;
   minTemp.innerHTML = Math.round(minTemperature);
+  getForecast(coords, "imperial");
 }
 
 function celcius(event) {
@@ -157,6 +160,7 @@ function celcius(event) {
   maxTemp.innerHTML = maxCelciusTemp;
   let minTemp = document.querySelector("#current-min");
   minTemp.innerHTML = minCelciusTemp;
+  getForecast(coords, "metric");
 }
 
 let fBtn = document.querySelector("#f-btn");
@@ -164,10 +168,10 @@ fBtn.addEventListener("click", fahrenheit);
 let cBtn = document.querySelector("#c-btn");
 cBtn.addEventListener("click", celcius);
 
-function getForecast(coordinates) {
+function getForecast(coordinates, units) {
   console.log(coordinates);
   let apiKey = "fda3688b1db05987dd5d07c237aecfba";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayForecast);
 }
 
